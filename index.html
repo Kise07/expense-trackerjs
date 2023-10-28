@@ -35,8 +35,13 @@
       <h3>Add new transaction</h3>
       <form id="form">
         <div class="form-control">
-          <label for="text">Text</label>
-          <input type="text" id="text" placeholder="Enter text..." />
+          <!-- <label for="text">Text</label>
+          <input type="text" id="text" placeholder="Enter text..." /> -->
+          <!-- Replace the text input with a dropdown (select) element -->
+          <select id="text">
+            <option value="" disabled selected>Select an item</option>
+            <!-- Options will be dynamically populated using JavaScript -->
+          </select>
         </div>
         <div class="form-control">
           <label for="amount"
@@ -46,6 +51,8 @@
           <input type="number" id="amount" placeholder="Enter amount..." />
         </div>
         <button class="btn">Add transaction</button>
+        <!-- Error message div -->
+        <div id="error-message" class="error-message"></div>
       </form>
     </div>
 
