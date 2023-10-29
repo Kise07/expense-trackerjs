@@ -1,4 +1,6 @@
 const balance = document.getElementById('balance');
+const incomeBtn = document.getElementById('income-btn');
+const expenseBtn = document.getElementById('expense-btn');
 const moneyPlus = document.getElementById('money-plus');
 const moneyMinus = document.getElementById('money-minus');
 const list = document.getElementById('list');
@@ -6,6 +8,20 @@ const form = document.getElementById('form');
 const text = document.getElementById('text');
 const amount = document.getElementById('amount');
 const errorMessage = document.getElementById('error-message');
+
+let isIncome = true; // Flag to track whether the transaction is income or expense
+
+incomeBtn.addEventListener('click', () => {
+  isIncome = true;
+  incomeBtn.classList.add('active');
+  expenseBtn.classList.remove('active');
+});
+
+expenseBtn.addEventListener('click', () => {
+  isIncome = false;
+  expenseBtn.classList.add('active');
+  incomeBtn.classList.remove('active');
+});
 
 const localStorageTransactions = JSON.parse(localStorage.getItem('transactions')) || [];
 
@@ -25,7 +41,7 @@ function addTransaction(e) {
     const transaction = {
       id: generateID(),
       text: enteredText,
-      amount: enteredAmount,
+      amount: isIncome ? enteredAmount : -enteredAmount,
     };
 
     transactions.push(transaction);
@@ -55,6 +71,13 @@ function addTransactionDOM(transaction) {
   item.querySelector('.delete-btn').addEventListener('click', () => removeTransaction(transaction.id));
   list.appendChild(item);
 }
+
+list.addEventListener('click', (e) => {
+  if (e.target.classList.contains('delete-btn')) {
+    const itemId = e.target.parentElement.dataset.id;
+    removeTransaction(itemId);
+  }
+});
 
 function updateValues() {
   const amounts = transactions.map(transaction => transaction.amount);
