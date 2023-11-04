@@ -131,7 +131,17 @@ const items = [
 	'Education',
 	'Medical Expenses',
 	'Miscellaneous',
+	'Salary',
+	'Freelance Work',
+	'Investment Income',
+	'Rental Income',
+	'Interest Income',
+	'Gifts',
+	'Grants',
+	'Scholarships',
+	'Allowance',
 ];
+
 
 function init() {
 	list.innerHTML = '';
